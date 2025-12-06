@@ -1,0 +1,201 @@
+
+//classifier 
+ so basically  A classifier is simply a machine learning model whose goal is to assign input data to discrete classes or categories.
+
+ input : features of the data(x)
+    ex: image pixels,email text 
+ output : a predicted class label(y)
+    ex:cat,dog 
+ learning :
+      The classifier learns from labeled data during training (supervised learning).
+      It finds patterns or boundaries that separate classes in the feature space.
+ 
+   //classiffication models 
+
+        | Classifier Type        | Use Case                           |
+    | ---------------------- | ---------------------------------- |
+    | Logistic Regression    | Binary classification (yes/no)     |
+    | Decision Tree          | Multi-class classification         |
+    | Random Forest          | Complex classification tasks       |
+    | Support Vector Machine | Separating data with clear margins |
+    | Neural Network         | Images, speech, text               |
+    | k-Nearest Neighbors    | Classify based on similarity       |
+
+   Input features (x) ---> Classifier (ML model) ---> Predicted class (y)
+  A classifier is just a model trained to decide which category an input belongs to based on learned patterns from data.
+
+ //evaluating a classifier 
+   Evaluating a classifier means measuring how well a trained model predicts the correct class labels on new data.
+
+   why evaluate ?
+    to know if the model is accurate or reliable 
+    to compare different models and choose the best oen 
+    to detect the model if it is underfitting or overfitting 
+
+   how to test ??
+   1. use a test set : 
+          A set of labeled data not used in training.
+          Compare the predicted labels with the actual labels.
+    2. metrics for evaluation 
+        classification accuracy(CA) : fraction of correct predictions 
+             accuracy = (number of correct predictions) / total test samples 
+        classificatoin error : fraction of wrong predictions 
+             error = (number of wrong predicitons)/total test samples 
+        other metrics(used when classes are imbalanced )
+    
+    as the test set is only a small subset of all possible inputs but true performance requires all possible inputs 
+    1. empirical accuracy, 2. use probablity theory 
+        empirical accuracy = (number of correct predictions)/N 
+     gives estimate of classifiers performance 
+    
+    2. using probability theory: 
+         using these find the error for each type of classsfier to fidn the best 
+         ..probability basics 
+           . non-negativity : P(E) >= 0 for any event E 
+           . normalisation : P(S) = 1 (the probability of teh sampel space is 1)
+           . additivity P(E1 U E2) = P(E1) + P(E2)    if E1 intersection E2 = phi 
+    loss function measures the cost of a prediction.
+       L(y,y`) = {0 if y` = y ,1 if y` != y}
+    now calculate error probability P(error/X) = P((y`!=y/X))
+    expected error over all inputs P(error) = Ex[P(error|X)]
+    this is the true error we wan tto minimize 
+
+  loss function -> L(x)
+  p(error/x) => L(x)
+  p(error) => E[p(error/x)] => L(x)P(x)
+
+  so if we calculate thes eerror so we select the one with lowest error 
+
+  as we know test set is independently drawn from training set which is disjoint division 
+  //the division is random because or else the only one pattern test data is retrieved so we use random test data 
+  //for further optimisation we do multiple dividons adn calculate the average erroradn accuracy which gives us variance or standard deviation 
+
+
+ //now how to evaluate a regression model 
+ three main metrics used 
+ 1. R square 
+ 2. mean square error(MSE)/root mean square(rmse)
+ 3. mean absolute error(mae)
+
+1. R square value 
+    R², also called the coefficient of determination, measures how well the regression model explains the variability of the target variable.
+     R^2 = (variance explained by the model)/(total variance of the data)
+     R^2 = 1- (E(yi-y^)2 /(E(yi-y`)2))
+            | Symbol      | Meaning                                   |
+    | ----------- | ----------------------------------------- |
+    | yi           | Actual/original value of i-th sample      |
+    | y^          |  Predicted value from the regression model |
+    | y`          | Mean of all actual values                 |
+
+     R² always lies between 0 and 1
+     Higher R² → better model fit
+     Low R² → model is poor at predicting
+2. MSE (mena squared error) 
+     Measures the average squared difference between the actual values adn the predicted values 
+     
+        MSE = 1/N (yi-y^)2  yi is the actual adn y^ si the predicted values 
+    Larger errors get more weight, so the model is penalized more for big mistakes.
+    Lower MSE → predictions are closer to actual values
+    Higher MSE → predictions deviate more
+
+3. Root mean squared error (RMSE)
+     RMSE = square root of (MSE)
+     It has the same unit as the target variable, making it easier to interpret.
+    
+4. Mean absolute error 
+         MAE = 1/N(yi - y^)
+    Instead of squaring, we take the absolute value of errors.
+    Treats all errors equally, unlike MSE which penalizes large errors more.
+    Lower MAE → predictions are close to actual values
+    Higher MAE → predictions deviate more
+
+    | Metric            | Formula                                                                           | Interpretation / Desirable Value                                         | Notes                                                      |                                             |                                                       |
+| ----------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------- |
+| **MSE**           | $\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2$                                  | **Lower is better** – smaller squared errors indicate better predictions | Penalizes large errors more heavily                        |                                             |                                                       |
+| **RMSE**          | $\sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2} = \sqrt{MSE}$              | **Lower is better** – closer predicted values to actual                  | Easier to interpret than MSE; still penalizes large errors |                                             |                                                       |
+| **MAE**           | ( \frac{1}{N} \sum\_{i=1}^{N}                                                     | y\_i - \hat{y}\_i                                                        | )                                                          | **Lower is better** – smaller average error | Treats all errors equally; less sensitive to outliers |
+| **R² (R-Square)** | $1 - \frac{\sum_{i=1}^{N} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{N} (y_i - \bar{y})^2}$ | **Higher is better** – closer to 1 indicates better model fit            | Measures proportion of variance explained by the model     |                                             |                                                       |
+
+
+//datasets
+    1. Train set 
+    purpose : used to fit the model,learn the model parameters 
+    what it contains: input data + corresponding labels 
+    Think of it as “teaching the model from examples”.
+
+    2. validation set 
+    Purpose: Used to tune hyperparameters (like number of layers, learning rate, number of trees, etc.) and evaluate the model while training.
+    Key point: The validation set is not part of the actual training, but helps prevent overfitting.
+    Think of it as “checking your progress and making improvements”.
+
+    3. Test set 
+    Purpose: Used for final evaluation of the trained model.
+    Only used after training and validation are complete.
+    Provides an unbiased estimate of the model’s real-world performance.
+    Think of it as “exam day for the model”.
+
+    | Dataset        | Used For                      | When Used                  | Goal                           |
+    | -------------- | ----------------------------- | -------------------------- | ------------------------------ |
+    | **Train**      | Learn model parameters        | During training            | Fit the model                  |
+    | **Validation** | Tune hyperparameters, monitor | During/after training      | Optimize model                 |
+    | **Test**       | Final evaluation              | After training is complete | Measure real-world performance |
+
+   Do not use the test set for hyperparameter tuning. That defeats the purpose.
+   Validation set ≠ test set, although sometimes people mistakenly use validation as test.
+   All three sets should ideally be drawn from the same distribution as the original data.
+   train set : classrom lessons 
+   validation set :practice sets 
+   test set :final set 
+
+   //data sampling methods 
+   1.hold out (simple split)
+     split the dataset once into trainset adn test set a small part of traiinign si validation for hyperparameter tuning 
+    problem :
+        The result can depend a lot on how you split the data.
+        If the split is unlucky (some patterns only appear in training or test), the evaluation may be misleading.
+   
+   2. Cross-validation (better sampling)
+      Idea: Use multiple splits of the data to get a more reliable estimate of performance.
+      The data is partitioned into complementary subsets:
+        . Train on one subset
+        . Validate on the other subset
+      Repeat this multiple times with different partitions.
+      Average the results → more robust performance estimate.
+   3.  k-Fold Cross Validation (Most Common)
+       Shuffle the dataset randomly.
+       Split it into k equal parts (folds).
+       for each fold :
+           Use the fold as validation set
+           Use the remaining k-1 folds as training set
+           Train the model on training folds and evaluate on the validation fold
+           Save the evaluation score
+        After all k rounds, average the scores → final estimate of model performance
+        Benefit: Every data point gets to be in the validation set exactly once and in the training set k-1 times.
+    
+//overfit vs underfit 
+ Overfitting: refers to a model that models the training data too well.
+  Overfitting happens when a model learns the training data too perfectly, including noise and random patterns that don’t generalize to new data.
+  Result: Model performs very well on training data but poorly on unseen/test data
+ 
+ underfitting :
+     Model is too simple to capture patterns in training data.
+     Poor performance on all the datasets 
+
+  | Concept          | Training Performance | Test Performance | Cause                              | Remedy                                                     |
+| ---------------- | -------------------- | ---------------- | ---------------------------------- | ---------------------------------------------------------- |
+| **Underfitting** | Low                  | Low              | Model too simple, missing features | Increase complexity, add features, try better algorithm    |
+| **Overfitting**  | High                 | Low              | Model too complex, memorizes noise | More data, regularization, simpler model, cross-validation |
+
+ The goal in ML is balance: avoid underfitting (too simple) and overfitting (too complex) → generalize well to new data.
+
+
+
+ | Feature    | Parametric                                          | Non-Parametric                       |
+| ---------- | --------------------------------------------------- | ------------------------------------ |
+| Assumption | Fixed form of distribution                          | No specific form assumed             |
+| Parameters | Fixed, independent of dataset                       | Grows with dataset                   |
+| Complexity | Low                                                 | High                                 |
+| Examples   | Linear Regression, Logistic Regression, Naive Bayes | KNN, Decision Trees, Parzen Window   |
+| Pros       | Fast, simple                                        | Flexible, can model complex patterns |
+| Cons       | Limited flexibility                                 | Slower, requires more data           |
+

@@ -1,0 +1,318 @@
+
+//local search algorithms adn optimization problems 
+
+//gradient 
+ if my function is f(x,y,z...) 
+   then gradeint is delta f = (delta(f)/delta(x) , delta(f)/delta(y) .....)
+
+  Each component shows how much 𝑓 changes if you change that variable slightly.
+
+ 2️⃣ Interpretation of Gradient
+
+    Direction: The gradient points toward the steepest increase of the function.
+    Magnitude: Tells how steep the slope is in that direction.
+
+ using gradient for optimization 
+ 1. Maximization problem (find maximum value of f):
+       Move in the direction of the gradient → function increases fastest.
+ 2. Minimization problem (find minimum value of f):
+       Move in the direction of negative gradient → function decreases fastest.
+
+So, the gradient tells you which direction is “best” depending on whether you want to maximize or minimize the function.
+
+//so we calculate gradient descent to check for the best next direction 
+
+1. univariate gradient descent(one variable) -> calculate the next x 
+2. multivariate gradient descent (two variables) -> clacluate the next x,y 
+
+above you use first derivative -> linear approximation
+
+Gradient Descent vs Newtons Descent 
+
+    | Aspect                             | **Gradient Descent**                  | **Newton's Method**                               |
+    | ---------------------------------- | ------------------------------------- | ------------------------------------------------- |
+    | **Uses**                           | First derivative (gradient)           | First and second derivatives (gradient + Hessian) |
+    | **Update Rule**                    | $x = x - \alpha \cdot f'(x)$          | $x = x - \frac{f'(x)}{f''(x)}$                    |
+    | **Convergence Speed**              | Slower (linear convergence)           | Faster (quadratic convergence)                    |
+    | **Best For**                       | Large-scale problems, noisy gradients | Small problems, smooth and well-behaved functions |
+    | **Computational Cost**             | Low (no second derivative needed)     | High (needs Hessian matrix in multivariate case)  |
+    | **Requires Learning Rate?**        | ✅ Yes                                 | ❌ No (automatically finds optimal step size)      |
+    | **Can get stuck in flat regions?** | ✅ Yes                                 | ❌ Less likely                                     |
+
+
+//newton descent takes less time to reach the end 
+
+//step size 
+    step size should be carefully taken 
+    if n is too small then the convengence process will be slow ,number of iterrations will be large 
+    if n is too large then the correction process will overshoot and can even diverge 
+
+//linear classifier 
+    classification
+     | Condition         | Action                         |
+    | ----------------- | ------------------------------ |
+    | $g(x_1, x_2) > 0$ | Predict **Class 2**            |
+    | $g(x_1, x_2) < 0$ | Predict **Class 1**            |
+    | $g(x_1, x_2) = 0$ | Point lies **on the boundary** |
+
+    g(x1,x2) = w1x1 + w2x2 + b 
+
+        | Term         | Meaning                  |
+    | ------------ | ------------------------ |
+    | w1, w2     | Weights for features     |
+    | b          | Bias or threshold        |
+    | g(x1,x2)   | Linear decision function |
+    | g=0        | Decision boundary (line) |
+    | Sign of g  | Class assignment         |
+
+    actually that line w1x1+w2x2 +b =0 
+      This equation represents a line (in 2D) or a hyperplane (in higher dimensions).
+      The line divides the feature space into two halves.
+      Points on one side are Class 1, the other side are Class 2
+
+
+//perceptron 
+    Perceptron is the name given to the linear classifier with a threshold delimiter.
+    If there exists a Perceptron that correctly classifies all training examples, then we say that the training set is linearly separable.
+ A perceptron is a type of algorithm used to classify input data into two classes using a linear decision boundary.
+
+ //perceptron structure 
+  Inputs (x₁, x₂, ..., xₙ) ---> [∑ wᵢxᵢ + b] ---> Activation ---> Output
+
+ steps 
+  1. input features: x1,x2,x3......xn (representing a feature of hte data)
+  2. weights : w1,w2,w3.....wn  (each input given weight that represents its importance in the decision-making process)
+  3. bias b  (constand term added to weighted sum helping model shift in the decision theory)
+  4.linear combination  z = w1x1 +w2x2 +.......wnxn + b  = w.x +b 
+  5.activation function (Step function ):   (a function that processes input nad produces output)
+             output = {1 if z>0 , 0 otherwise}
+  The perceptron updates weights based on errors during training:
+       wi = wi + alpha(y-y^).xi 
+
+  1.so actually a perceptron is like a linear classifier that classifier the input 
+  2.it takes input pixels adn multiply each one of them with a specific weights
+  3.and then all of these multiplied values now added together then the result is passeed to an activation function 
+  4. the activation fucntion is a step fucntion gives ouput either 1 or 0 
+  5. if 1 positive classification , if  0 negative classification 
+
+  a single neuron can take multiple input signals and apply weights to these inputs 
+
+  how do we decide what weights are multiplied by the input ??
+   on more training
+
+  //single layer perceptron 
+  one input layer, one output layer  ,no hidden layers 
+  //multilayer perceptrons 
+    include hidden layers 
+
+  more hidden layers means network is deeper which we call it as deep learning models 
+
+ //how the perceptron learns 
+  1. initialize the weights and bias 
+  2. feed the input data to the perceptron and calculate  the weighted sum 
+  3. apply the activation function to produce an output 
+  4.comapre the output with the atual label (expected output)
+  5. update the weights adn bias based on the error (diff between actual and predicted) suing perceptron learning rule 
+      wi = wi + eeta*y*x` (x` is augmented)
+      
+      y ->actual output 
+      y^ -> predicted output by perceptron 
+      eets -> learning rate 
+    
+ //the above perceptron (online perceptron)
+     You update immediately after each training example if it’s wrong.
+     Example: see one misclassified point → fix weights right away.
+    That’s called online (or stochastic) learning.
+    
+//batch perceptron 
+    not like aboev at a time you will not apply the difference 
+    after scannign all points,add up all corrections and update the weights and bias in one go 
+    repeat for multiple passes through dataset 
+    wi = wi + eeta *(sum of (y*x))
+    b = b + eeta*(sum of (y*x`)
+
+//single sample correction 
+    Single sample correction = update weights immediately using only the current misclassified sample.
+    This is what’s also called online perceptron update.
+
+//sample data vs augmented data vs normalized augmented data 
+
+1.sample data is given fature adn output data 
+    ex: | Feature 1 | Feature 2 | Label |
+        | --------- | --------- | ----- |
+        | 2         | 3         | +1    |
+        | -1        | -2        | -1    |
+        | 4         | 1         | +1    |
+2.augment teh data 
+ include the bias suppose 1 here 
+
+    | x1 | x2 | x3=1 | y  |
+    | -- | -- | ---- | -- |
+    | 2  | 3  | 1    | +1 |
+    | -1 | -2 | 1    | -1 |
+    | 4  | 1  | 1    | +1 |
+
+3.normalize the augmented data 
+ multiply by the label y :
+          a = y*x
+
+    | Augmented {x}         | Label y | Normalized a |
+    | --------------------- | ------- | ------------ |
+    | (2, 3, 1)             | +1      | (2, 3, 1)    |
+    | (-1, -2, 1)           | -1      | (1, 2, -1)   |
+    | (4, 1, 1)             | +1      | (4, 1, 1)    |
+
+so now you have the normalized augmented data and pick soome weight vector (0.5,-0.5,0,1)
+
+4. compute w^-Ta for each sample 
+   w^-T = w1a1 +w2a2 +ba3 
+
+for each samples a =(2,3,1) -> calculate w^-T*a
+  if negative -> misclassified 
+  positive -> correctly classified 
+
+5. observations Using normalized augmented data, all misclassified samples give negative values of w^-T*a 
+
+   for all misclassified a we add them to w 
+ now we do the 4th step multiple times until all are classfiied correctly 
+
+
+//linearly seperable data 
+Data is linearly separable if you can draw a straight line (or hyperplane) 
+ that completely separates the points of one class from the other in the feature space.
+    in 2d it its a straight line 
+    in 3d its plane 
+    in n-d its called a hyperplane 
+
+    | Concept                 | Explanation                                              |
+    | ----------------------- | -------------------------------------------------------- |
+    | Linearly Separable      | Can separate classes with a **straight line/hyperplane** |
+    | Not Linearly Separable  | **No straight line** can perfectly separate classes      |
+    | Perceptron works if     | Data is linearly separable                               |
+    | Solution for non-linear | Multi-layer perceptron, kernel trick                     |
+
+
+//summaryy 
+  Perceptron Learning for Linearly Separable Data :
+   The goal: Find the decision boundary (weights 𝑤 and bias b) that separates the two classes.
+   
+   Since the data is linearly separable, the perceptron will converge to some solution
+
+1.Standard (iterative) perceptron algorithm 
+   Start with random weights w adn bias b 
+   for each input xi :
+       compute ouput y^ = step(w.xi +b)
+       if ouput != target yi 
+         .updates weights nad bias immediately 
+             w = w + alpha*yi*xi
+             b = b + alpha*yi
+    Repeat until all points are classified correctly.
+    Key: Updates happen immediately after each misclassification.
+
+2.batch perceptron 
+   Instead of updating after each sample, sum all updates over the whole dataset first:
+    delta (w) = sum of yi*xi 
+    delta (b) = sum of yi
+    Where 
+   M = set of misclassified samples.
+  Update once per iteration using the sum.
+  Key: More stable updates, good for batch processing.
+
+3. single sample correction with normalized /augmented data      
+    Augment data: Include bias in the input vector x^
+    Normalize data for better convergence.
+   For each misclassified sample, update the weights immediately:
+      w = w + alpha*yi*xi^
+      yi = -1 or +1 
+    Repeat until all samples are classified correctly.
+    Key: This is essentially the standard perceptron rule but written in augmented normalized form, often easier to implement mathematically.
+
+| Method                                          | Update Timing                   | Notes                                               |
+| ----------------------------------------------- | ------------------------------- | --------------------------------------------------- |
+| Standard Perceptron                             | After each misclassified sample | Simple, iterative                                   |
+| Batch Perceptron                                | After processing all samples    | More stable, batch mode                             |
+| Single Sample Correction (Augmented/Normalized) | After each misclassified sample | Uses augmented vector, often cleaner mathematically |
+  
+  Important: All three methods only work for linearly separable data. If the data isn’t separable, the weights won’t converge.
+
+
+//before you apply learning model like above perceptrons methods 
+we 
+1. define the problem 
+   what are inputs /features X = (x1,x2,x3,x4....)
+   what are the outputs/labels t = +1 or -1 
+2. describe how to measure mistakes 
+   define an error function E = 1/2 (t-o)^2   (here 1/2 is for mathematical convinience)
+   this tells the model how wrong it is 
+3. choose a model 
+  linear function o = wo + w1x1 +......+ wnxn 
+
+
+//Linear regression 
+
+//convergence in gradient descendent 
+  Imagine you have some data points and you want a line that fits them.
+  You define error as the difference between your predictions and actual values (squared error).
+  Gradient descent is like “walking downhill” on the error surface to minimize error.
+
+  steps : 
+   start with random waits w(slope,bias)
+   compute gradient(slope of error w.r.t weights)
+   Update weights slightly in the opposite direction of the gradient:
+       wnew = wold - eeta*deltaE(W)
+    repeat this until teh line stops chanign much -> convergence 
+
+   Gradient descent gradually rotates and shifts the line until error is minimized.
+
+//direct method 
+  Sometimes you don’t want to do iterations; you just want the best weights in one shot.
+  steps :
+   let d->data matrix, w be weight vector (including bias) adn T be the target values 
+  
+   the squared error 
+   | Method               | Use Case                                                           |
+    | -------------------- | ------------------------------------------------------------------ |
+    | Gradient Descent     | Large datasets, online learning, or when $D^T D$ is hard to invert |
+    | Closed-Form Solution | Small/medium datasets, exact solution, can invert $D^T D$ easily   |
+
+
+perceptron vs linear regression(covergence/closed-form)
+1.perceptron 
+    Type: Classifier
+    Output: Discrete — either Class 1 or Class 2
+    Bias: Included (as part of the weights, usually with augmented input)
+    Error: Only considers misclassification (0/1 error)
+    Convergence: Only guaranteed if data is linearly separable
+    Goal: Find a decision boundary (line/hyperplane) separating classes
+2. Linear regression(Gradient descent /cloesd form)
+    Type: Regression (not classification)
+    Output: Continuous values (e.g., any real number)
+    Bias: Included in weights if you add a column of ones in your data matrix
+    Error: Minimizes squared error between predicted and actual values
+    Convergence: Always (gradient descent) or exact solution (closed-form)
+    Goal: Find weights that best fit the data points, not separate classes
+
+  | Feature                | Perceptron                         | Linear Regression           |
+| ---------------------- | ---------------------------------- | --------------------------- |
+| Output                 | Class label (0/1 or +1/-1)         | Real-valued prediction      |
+| Purpose                | Classification                     | Approximation / Prediction  |
+| Bias                   | Explicit (augmented input)         | Included via 1-column in D  |
+| Convergence guaranteed | Only if data is linearly separable | Always (or exact solution)  |
+| Error considered       | Misclassification                  | Squared error               |
+| Decision boundary      | Exists (line separating classes)   | No boundary; fits best line |
+
+  Perceptron: “I only care if my answer is right or wrong. If wrong, I adjust weights.”
+  Linear regression: “I care about how far off my answer is from the target. I adjust weights to minimize this distance.”
+
+//outliers 
+  An outlier is a data point that is significantly different from the rest of the data
+  when you minimize squared error -> (yi -y^)^2
+ this gives huge error outshadowing other errors 
+
+| Term     | Meaning                                         |
+| -------- | ----------------------------------------------- |
+| Outlier  | Data point far from the general trend           |
+| Problem  | Has a **huge squared error** → pulls model away |
+| Solution | Remove, replace, or use robust methods          |
+
+

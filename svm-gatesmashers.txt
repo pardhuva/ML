@@ -1,0 +1,28 @@
+
+//svm (support vector machines)
+  support vector machines (svms) are supervised machine learning algorithms used for 
+   both classification and regression tasks 
+
+//hyperplane: a hyperplane is a decision boundary that seperates data points of different classes in the feature space 
+   ex: spam and non spam are two classes  then this hyperplane is the one that classifies both classes 
+       the line that seperates both 
+   mathematical representation - w.x + b = 0 here  w is the weight 
+                                                   x is the feature 
+                                                   b is bias 
+            if multiple features   - w1x1 + w2x2 + w3x3 + b =0
+
+   ex: if we have to classify animals into cats (+1) and dogs(-1) based on weight and height,
+        the hyperplane could be 3*weight + 2*height -50 =0  here weight and height are features and 3,2 are weights 
+
+
+//margin -> margin is the distance  between teh hyperplane and the nearest data point of either class.
+            svm tries to maximize this margin to improve classification confidence 
+  
+//support vectors: these are the data points that are closest to the hyperplane. 
+            these points influence the orientation and position of the hyperplane 
+
+//hard margin: assumes data is perfectly seperable by the hyperplane.
+               all points must lie outside the margin 
+//soft margin: allows some misclassifications or margin violations for non-linearly separable data.
+//kernel function: a kernel function transforms data into a higher-dimensional space to make it linearly 
+

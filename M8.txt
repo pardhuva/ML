@@ -1,0 +1,30 @@
+
+//Regularization 
+ Regularization is used to prevent overfitting.
+
+ overfitting happens when :
+  . model is too complex 
+  . fits noise instead of the real patter 
+  . performs well on training data but poorly on test data 
+
+Goal: Make the model simpler so it generalizes well.
+
+//bias and variance 
+ These are two types of errors in any model.
+ 1. bias 
+   Error from wrong assumptions.
+   ex: data is quadratic, you fit straight line 
+    high bias model - too simple 
+    outcome :
+      underfitting 
+      makes saem mistakes on every dataset 
+
+ 2. variance 
+   Error from being too sensitive to training data.
+   Fit an 8th-degree polynomial
+   - high variance model - too complex 
+   outcome :
+     overfitting 
+     training error extremely low 
+     test error veyr high 
+     

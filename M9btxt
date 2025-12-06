@@ -1,0 +1,85 @@
+
+1. What is Constrained Optimization?
+
+We want to maximize or minimize some function:
+f(x)
+subject to constraints, like:
+  g(x) = 0 or g(x) <= 0
+
+ex: Maximize profit given limited budget
+Minimize cost given resource limits
+Maximize margin in SVM given classification constraints
+
+2. Free Maximum vs Constrained Maximum
+
+Free optimum = best point anywhere on the surface.
+Constrained optimum = best point only along the allowed slice defined by the constraint.
+
+Think of climbing a hill:
+Free optimum = the highest peak
+Constrained = highest point on a specific path only
+
+3. Two Ways to Solve Constrained Optimization
+(i) Substitution Method
+Solve the constraint for one variable and substitute.
+
+Example:
+Constraint:
+x+y=10
+Solve for y:
+y=10−x
+
+Substitute into f(x, y)
+→ now optimize w.r.t one variable.
+With this substitution, the constrained maxima
+problem is reduced to a free maxima problem with
+one independent variable.
+
+When is this good?
+✔ simple problems
+❌ impossible when constraints are complicated
+
+4. Lagrange Multipliers (for Equality Constraints)
+
+This is the popular and powerful method.
+
+We want to:
+minf(x)subject tog(x)=0
+Construct the Lagrangian:
+L(x,λ)=f(x)+λg(x)
+
+Take partial derivatives:
+derviative of lnagragian =g(x)=0
+
+Solve all equations simultaneously.
+Why it works?
+The solution lies where the gradient of f is parallel to the gradient of g.
+
+6. KKT Conditions (Karush–Kuhn–Tucker)
+
+KKT conditions extend Lagrange multipliers to inequality constraints.
+
+Useful when constraint is:
+g(x)≤0
+KKT Conditions:
+
+Let objective:
+minf(x)
+
+Constraints:
+g(x)≤0
+
+Then the KKT conditions are:
+
+
+
+
+| Topic                    | Meaning                                                        |
+| ------------------------ | -------------------------------------------------------------- |
+| Constrained Optimization | Optimize f(x) subject to constraints                           |
+| Substitution             | Replace variables using constraint; simple cases               |
+| Lagrange Multipliers     | Solve equality constraints using Lagrangian                    |
+| λ (lambda)               | Sensitivity of objective to constraints                        |
+| KKT Conditions           | Extension to inequality constraints; used in SVMs              |
+| Why SVM uses KKT         | SVM optimization is convex + linear → KKT gives exact solution |
+| Support Vectors          | Points with λ > 0 (active constraints)                         |

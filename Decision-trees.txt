@@ -1,0 +1,27 @@
+
+//it is machine learning algo used for both classification and regression tasks 
+. tree structure 
+. decision nodes 
+. leaf nodes 
+. splitting 
+. entropy and information gain 
+. pruning 
+
+so its like helps in choosing the  decision 
+splitting is done based on entropy or information gain for the data  based on purity nad impurity of the data 
+if more impurity -> less information gain 
+the root node in the tree structure - less information gain 
+
+pruning - remove unnecessary edges 
+
+id3 algo, decision algo - to create decision tree in which using entropy, information gain you draw the decision tree 
+so for drawing you have to calculate the entropy and information gain so you can place less information gain at the top 
+
+steps
+step1 : entropy of enter dataset (S)
+step2 : entropy of all values 
+
+information gain = (entropy of whole data) - ((total number of x)/total number )* Entropy of (x)
+ here x is one feature value so you have to do with alll feature values 
+
+ 

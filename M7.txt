@@ -1,0 +1,76 @@
+
+//logistic regression 
+ it is a classification algorithm 
+ it is used to classify using sigmoid function that maps any real number to [0,1]
+   if P(y =1|x) >0.5 ->class 1 else class 0
+     sigma(z) = 1/(1+e^-z)
+
+it is used on probabilities 
+
+linear regression vs logistic regression 
+  Linear regression outputs any real number, not probabilities. Problems:
+    . Predicted values can be <0 or >1 → not valid probabilities.
+    . Decision boundary isn’t well-defined → classification may fail.
+    . Linear regression assumes constant variance → violates classification assumptions.
+ in linear regression the predicted value can be any value 
+
+ logistic regression 
+   Logistic regression uses sigmoid → always outputs a probability in [0,1].
+
+   | Aspect        | Linear Regression | Logistic Regression |
+| ------------- | ----------------- | ------------------- |
+| Output        | Real number       | Probability \[0,1]  |
+| Goal          | Predict quantity  | Predict class       |
+| Activation    | Identity          | Sigmoid             |
+| Loss Function | Squared Error     | Cross-Entropy       |
+| Use Case      | Regression        | Classification      |
+
+Logistic regression is like linear regression wrapped in a sigmoid to output probabilities for classification.
+
+Logistic regression maps linear combination to [0,1] using sigmoid.
+Uses cross-entropy loss for classification.
+Weights are updated using gradient descent (batch or stochastic).
+Can extend to multiple features easily: z = wo +w1x1 +w2x2 + .......
+
+linear vs perceptron vs logistic 
+| Aspect                 | Linear Regression      | Perceptron                          | Logistic Regression            |
+| ---------------------- | ---------------------- | ----------------------------------- | ------------------------------ |
+| Goal                   | Predict continuous     | Binary class                        | Binary (probability)           |
+| Output                 | Real number            | Class label                         | Probability \[0,1]             |
+| Sensitive to outliers? | Yes                    | No                                  | Moderate                       |
+| Activation             | Identity               | Step                                | Sigmoid                        |
+| Learning               | Gradient / Closed form | Perceptron rule                     | Gradient descent               |
+| Data requirement       | Any                    | Linearly separable                  | Any                            |
+| Use case               | Regression             | Classification (linearly separable) | Classification (probabilistic) |
+
+//actually perceptron or linear regression are straight lines 
+whereas logistic regression -> gives you a curve that classifies them 
+ this curve will be between 0 to 1 
+in linear regression we fine line that minimizes the sum of squares 
+
+//logistic regression 
+supervised classefication model 
+dependent variable is found and classefied as binary(0 or 1) from independent variables
+
+//outliers effects
+
+| Model               | Sensitive to Outliers? | Why                                                                 |
+| ------------------- | ---------------------- | ------------------------------------------------------------------- |
+| Linear Regression   | Very                   | Squared error magnifies large deviations                            |
+| Logistic Regression | Moderate               | Sigmoid + cross-entropy reduces extreme impact                      |
+| Perceptron          | Low                    | Updates only for misclassified points; ignores correctly classified |
+
+
+//maximum likelihood estimation 
+Probability: “If my weights are this, what’s the chance of a point being class 1?”
+Likelihood: “Given all the points I observed, which weights make the data most probable?”
+Logistic regression uses MLE to choose weights. Gradient ascent moves the weights to maximize likelihood.
+
+| Benefit                                   | Explanation                                                                                                                          |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Handles multiple observations             | MLE combines probabilities of all points via the **product** (or sum of log-likelihoods), giving a global objective for the dataset. |
+| Gives **principled estimation**           | MLE is a statistically rigorous way to find parameters; it has strong theoretical foundations.                                       |
+| Works with **any dataset size**           | Small datasets → likelihood still meaningful; large datasets → gradient ascent scales well.                                          |
+| Provides **probabilistic interpretation** | MLE naturally outputs probability estimates for classification, not just a hard 0/1 label.                                           |
+| Supports **extensions**                   | You can add regularization (penalized likelihood), multinomial logistic regression, etc., easily using the likelihood framework.     |
+

@@ -1,0 +1,220 @@
+
+what is ML ?
+ ML stands for Machine Learning. In simple terms, it’s a branch of Artificial Intelligence (AI) that allows computers to learn from data and make predictions or decisions without being explicitly programmed for every task.
+ Machine Learning is the study of computer algorithms that improve automatically through experience.
+
+    1. Core Idea: Instead of writing rules for the computer, you give it data and let it figure out patterns.
+    2.  How it works:
+        You feed the system training data (examples).
+        It learns a model (a mathematical representation of patterns).
+        You can then give it new data to make predictions or decisions.
+
+    ML uses math and probability(statistics) to detect hidden trends
+
+//difference from traditional programmming 
+
+    | Traditional Programming         | Machine Learning                     |
+    | ------------------------------- | ------------------------------------ |
+    | You write the rules manually    | Machine finds the rules from data    |
+    | Input + Rules → Output          | Input + Output → ML learns the Rules |
+    | Very specific and hard to scale | Flexible, data-driven, and scalable  |
+
+applications :
+  1. email spam detection here instead of giving like if there is something like click here you get 100money to consider it as spam manually 
+     give some spam adn non spam emails it will automatically identify them 
+  2. voice assistants - Instead of writing manual “if user says X → reply Y” rules, ML learns from lots of examples and figures out how to respond appropriately, even to questions it hasn’t seen before.
+  3. recommenddtion systems 
+
+//early days  -> rule based ai 
+    computers didnt learn from data , instead tehy followed a set of manually written rules created by humans 
+    ex: early days "if x happens do y" thsi led to only narrow tasks possible only those written 
+
+//inductive vs deductive 
+    deductive reasoning -> traditional programming means like rule based ai (given input and rules gives you output )
+    inductive reasonign -> machine learning -> learn from data given input and output learn the behind rules 
+
+//ml systems and inference 
+  ML systems learn from data how to make predictions or decisions.
+  After training on data, they can infer results on unseen data (called test data).
+  Example: You train a model on past house prices, and it predicts the price of a new house you haven’t seen before.
+
+  in ml features and labels are very important terms because 
+  features are what teh model looks at for prediction and  
+  labels are what it learn to predict and all the training is for
+
+  //types of input data 
+  a) Labelled exampels 
+        These are examples with known outputs (the answer is given).
+        Format: {features, label} → (x, y)
+                Features (x) = the input information the model sees
+                Label (y) = the output the model should predict
+        eg: 
+         | Features              | Label   |
+        | --------------------- | ------- |
+        | Normal RBC, Normal Hb | Healthy |
+        | Low RBC, Low Hb       | Anaemic |
+     *** this is SUPERVISED LEARNING 
+  b) Unlabelled examples 
+        These have features but no label.
+        Format: {features, ?} → (x, ?)
+        Example: You know the house type and size but don’t know the price.
+        ML models can sometimes cluster or find patterns in unlabelled data (unsupervised learning).
+    ** this is UNSUPERVISED LEARNING 
+
+//ml vs ml model 
+    machine learning (ML) :
+     def :  A technique or approach where we teach a machine to learn from data.
+     Goal: The machine figures out patterns or rules automatically without being explicitly programmed.
+    ml model :
+       Definition: A mathematical or computational representation of the relationship between features (inputs) and labels (outputs).
+       Goal: Once trained, it can predict labels for new, unseen data.
+    
+    ML = the process of teaching a student
+    ML Model = the formulas and rules the student writes down to solve new problem
+
+ ML is the technique; the ML model is the result of applying that technique to learn patterns from data.
+
+
+//phases of ml model development 
+ 
+ Two Phases of ML Model Development
+ 1. Training phase :  The phase where the ML model learns the relationship between features and labels.
+     Input: Labelled data → {features, label}
+      Output: A trained model that can generalize patterns.
+      Goal: Minimize errors and fit the model to the data.
+ 2. Testing / Inference Phase
+        What it is: The phase where the trained model is applied to new/unlabelled data to predict labels.
+        Input: Unlabelled data → {features, ?}
+        Output: Predicted labels
+        Goal: Evaluate how well the model generalizes to new examples.
+ 
+   Training = learning from labelled data
+    Testing / Inference = making predictions on unseen data
+    A good model performs well on both training and test data.
+
+//when to use ml 
+    1. When rules are hard to define : like predicting stocks 
+    2. When data is available
+    3. When predictions or classifications are needed - detecting fraud,predicting house prices 
+    4. when patterns are complex - detectign early signs of cancer 
+
+//hand written digit recognition 
+   The goal: Teach a machine to recognize digits (0–9) written by hand.
+   Input: An image of a digit
+   Output: The predicted digit (0–9)
+
+ //how ml solves 
+  1. collect data : use datasets which has thousands of handwritten digits 
+  2. trainign phase :
+      features : Pixel values of the image (e.g., 28×28 pixels → 784 features)
+      Labels: The actual digit (0–9)
+      The ML model (e.g., neural network, decision tree, SVM) learns patterns of how each digit looks.
+  3. testing/inference phase :
+      Give the model a new handwritten digit image it hasn’t seen before.
+      The model predicts the digit based on what it learned.
+    
+//speech recognition :
+    Speech Recognition is the process of converting spoken language (audio) into text using machine learning and signal processing.
+
+    //how ml solves 
+    1. audio input : the user speaks into a microphone 
+         . teh system captures the audio form 
+    2. feature extraction :
+             Converts audio signals into numerical features
+             This step transforms raw sound into a format that ML models can understand.
+    3. model training :
+          The ML model is trained on pairs of audio and text (e.g., speech samples + transcriptions).
+          it maps from sounds to words 
+    4. inference : teh model listens to audio and predicts teh text 
+
+//relation between ai,dl,and ml 
+
+        | Concept | Definition                                           | Example                                   |
+    | ------- | ---------------------------------------------------- | ----------------------------------------- |
+    | **AI**  | Making machines "think" like humans                  | Chatbots, robots, game AI                 |
+    | **ML**  | Letting machines learn from data                     | Recommendation systems                    |
+    | **DL**  | Using deep neural networks to learn complex patterns | Self-driving cars, GPT, image classifiers |
+
+         so in ai -> ml is subset of ai -> dl is subset of ml 
+
+//types of machine learning 
+
+//supervised learning 
+   Supervised Learning is a type of Machine Learning where the model is trained on labeled data, meaning each input has a known output (label).
+
+   Goal: Learn a Target Function f 
+        We want to learn an unknown function f that maps input x to output y:
+           f(x) = y
+        Since we don’t know f, we use training data to learn a hypothesis h(x) that approximates f(x).
+
+    training data : datasets ((x1,y1),(x2,y2).....)
+    output : 
+       The ML model produces a function h(x) that learns from training data.
+       We hope h(x) will generalize well and predict correct labels for new, unseen data.
+    
+    so we the ml model uses common models on training data to generalize h(x) which works for unseen data too that closely resembles f(x)
+     
+     some of those models are Linear regression,logistic regression,decision trees,neural networks,k-nearest neighbours.......
+    
+   advantages : 
+      1. easy to evaluate performance as it has labelled data 
+      2. makes debugging more objective 
+      3. helps in comparing models fairly 
+      4. you can trace back where the model failed 
+ 
+
+//unsupervised learning 
+   Unsupervised Learning is a type of Machine Learning where the model is trained on unlabeled data 
+   — that means only input features (x) are provided, and no output labels (y) are given.
+
+   Goal: To discover hidden patterns, structures, or groupings in the data.
+
+   tasks like :
+
+        | Task                         | Description                                              | Example                                   |
+    | ---------------------------- | -------------------------------------------------------- | ----------------------------------------- |
+    | **Clustering**               | Grouping similar items/data points                       | Customer segmentation, document grouping  |
+    | **Dimensionality Reduction** | Reducing number of features while keeping important info | PCA for visualizing high-dimensional data |
+    | **Anomaly Detection**        | Finding unusual data points                              | Fraud detection, system failures          |
+    | **Association Rule Mining**  | Discovering relationships among variables                | Market basket analysis (Amazon, Flipkart) |
+
+    No labels were given , It learned patterns from feature similarities.,
+    It grouped similar data points without supervision.
+
+     | 📈 Need for Unsupervised Learning          | ⚠️ Disadvantages                     |
+    | ------------------------------------------ | ------------------------------------ |
+    | Labels are expensive/unavailable           | No ground-truth for validation       |
+    | Classes are unknown or unclear             | Evaluation is subjective/difficult   |
+    | Used for exploration before classification | Results may not always be meaningful |
+
+
+//classification problem 
+  Goal: Predict a discrete label (category/class) for a given input.
+  Output: Categorical (e.g., yes/no, cat/dog, spam/not spam)
+   Example:
+        Email spam detection → spam / not spam
+        Disease diagnosis → healthy / diabetic / anaemic
+        Handwritten digit recognition → 0–9
+  ml models used :
+    linear classifiers,decision tree,random forests,neural networks 
+
+//regression problems 
+   Goal: Predict a continuous numeric value for a given input.
+   Output: Continuous number (e.g., price, temperature, weight)
+     Example:
+        Predict house prices → ₹40,00,000
+        Forecast stock prices → ₹3500 per share
+        Predict temperature tomorrow → 32°C
+    ml models used : 
+       linear regression,polynomial regression,decisio trees ,neural networks 
+
+    | Feature            | Classification                        | Regression                    |
+    | ------------------ | ------------------------------------- | ----------------------------- |
+    | Output Type        | Discrete / Categorical                | Continuous / Numeric          |
+    | Examples           | Spam detection, disease diagnosis     | House price, stock prediction |
+    | Evaluation Metrics | Accuracy, Precision, Recall, F1-score | MSE, RMSE, MAE, R²            |
+    | Goal               | Assign **class label**                | Predict **numeric value**     |
+
+ Classification → Predict which category an input belongs to.
+ Regression → Predict a numerical value for the input.
+

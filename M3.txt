@@ -1,0 +1,68 @@
+//Bayes classifier 
+ the information that is independent of feature values -> apriori knowledge 
+ two classes -> w1,w2 
+ p(w1) + p(w2) = 1 
+ if p(w1) == p(w2) means uniform priors 
+
+ 1️⃣ Prior vs Posterior
+     Prior probability (p(w1)),p(w2)
+       The probability of a class before seeing any feature
+     posterior probability p(wi/x)
+       The probability of a class after observing a new input X
+       Takes features of x into account
+       p(wi/x) = (P(x/wi).P(wi))/p(x)
+
+       p(x/wi) ->likelihood ->how likely is the feature x given class wi 
+       p(wi) -> prior probability 
+       p(x) -> evidence
+
+//bayers classification 
+ initially we use prioir probability 
+   without considering feature we give to the max prior one 
+ next it is advanced to max posterior rule 
+   so we assign to teh max posteriror class 
+    predict class = max(p(wi/x))
+
+  if P(ω1| x) > P(ω2| x) => True state of nature = ω1
+  if P(ω2| x) > P(ω1| x) True state of nature = ω2
+  p(error|x) = p(w1|x) if we decide w2 
+  p(error|x) = p(w2|x) if we decide w1 
+
+  p(error|x) = min(p(w1,x),p(w2,x)) as we choose x to max of these two so error will be the remaining 
+  average error rate p(error) -> p(error|x)p(x)dx 
+   
+   here x is the feature 
+   w1,w2 are the clasees you assign to 
+
+   Error based on the Bayes classifier is the lower bound.
+   any classifiers error is greater than or equal to This
+
+
+Bayesian Decision Theory
+
+Bayesian decision theory is about making optimal decisions under uncertainty by combining:
+  Prior probabilities of classes p(ci)
+  likelihoods p(x/ci)(discrete or continous)
+  loss function L(action,true_classs)
+
+//explore risks 
+  given w1,w2,w3,w4........->classes 
+  given a1,a2,a3.............->actions 
+  gama(ai|wi)  -> loss of taking action ai when class is wi 
+  R(ai|x)   -> risk of taking action ai when the pattern (to map ) is x
+
+  so now which action to take for x ???
+  calcualte risks for all ai (actions) in that which gives minimum risks choose that action 
+  so for all Minimum (R(a1|x),R(a2|x),R(a3|x))...
+  
+  how to calcualte risk for each action 
+   for action lossfunction to each class 
+   R(a1|x)  -> gama(a1|wi) *P(wi|x)  (in this way calcualte the sum for all classes i)
+   you will get the ris of first action 
+  
+  now calcualte risks for all actions and take the minimum that is the action to be done 
+
+  overall risk ???
+   for all actions sum of R(ai|x) *P(x) for all i 
+
+   

@@ -1,0 +1,68 @@
+Why SVM?
+
+SVMs are powerful classifiers because:
+They avoid local minima (convex optimization)
+They give high generalization ability
+They balance training accuracy and model capacity
+They control overfitting using margins
+Applications include:
+handwritten digit recognition, text classification, face detection, object recognition, etc.
+
+2️⃣ Generalization Ability
+
+Training data is assumed drawn i.i.d. from distribution 
+P(x,y).
+We want a classifier 
+f(x;w).
+Two types of errors:
+Actual risk (true error): unknown
+Empirical risk (training error): can be measured
+
+We need a classifier that does well not only on training data but also on unseen test data → good generalization.
+
+VC Dimension (Capacity of Classifier)
+h measures how complex a classifier family is.
+
+If a classifier can correctly classify any labeling of 
+h points → VC dimension = h
+Example: perceptron in 2D → VC dimension = 3
+1-nearest neighbor classifier → infinite VC dimension
+
+If VC is too small → underfitting
+If VC is too large → overfitting
+
+4️⃣ Structural Risk Minimization (SRM)
+
+SRM chooses a classifier that:
+Empirical Risk (training error)
++
+VC Confidence (complexity penalty)
+Empirical Risk (training error)+VC Confidence (complexity penalty)
+Minimizes both training error + complexity.
+
+SVM is an SRM-based classifier → it minimizes a bound on actual risk.
+
+Lagrangian & KKT Conditions
+
+Lagrangian:
+KKT conditions:
+Stationarity
+Primal feasibility
+Dual feasibility
+Complementary slackness
+
+In SVM (convex + linear constraints), KKT conditions are necessary and sufficient → guarantee global optimum.
+
+SMO Algorithm
+SMO = Sequential Minimal Optimization.
+A fast algorithm to solve SVM dual problem by optimizing two Lagrange multipliers at a time.
+Advantages:
+No need to store huge kernel matrices
+Very fast for large datasets
+Standard implementation in all SVM libraries (LibSVM, sklearn SVC)
+
+| Concept           | Meaning                                                                                |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| **Convexity**     | The optimization surface has only one global minimum. SVM is convex → no local minima. |
+| **SMO Algorithm** | Efficient method to train SVMs by updating only 2 multipliers (α’s) at a time.         |
+

@@ -1,0 +1,92 @@
+//Naive bayes classification 
+
+so we want to assign a object to any class based on observing the features 
+1. bayes classifier 
+   What it is: A Bayes classifier assigns a class to a sample based on posterior probabilities.
+   formula 
+      w^ = max(P(wi|x)) 
+      with priories -> p(wi),class-conditional densities P(x|wi)
+  Problem: Often, we don’t know these probabilities in real data.
+
+2. handling unknown probabilities with density estimation 
+   Idea: Estimate class conditional probabilities using parametric methods and non parametirc methods 
+       assume a distribution and estimate parameters 
+    problems :
+      High-dimensional features → need lots of data (“curse of dimensionality”).
+      Small datasets → estimates are noisy → misclassification.
+      Computationally expensive for many features.
+    Result: Using density estimation alone often gives high error in practice.
+
+3. Naive Bayes classifier(practical solution )
+    Idea: Simplify density estimation by assuming features are independent given the class:
+       P(x1,x2,x3.....|wi) = product of P(xj|Ci)
+    Reduces complexity — now you estimate 1D distributions instead of joint multi-dimensional distributions.
+    Works well even if independence assumption is not strictly true.
+    Fast and easy to implement.
+    steps :
+      1. estimate priors P(wi) from class frequencies 
+      2. estimate conditional probabilites p(xj|wi) for each feature independently 
+      3. compute posteriror and assign the class with highest posterior 
+    Key takeaway: Naive Bayes trades a bit of theoretical accuracy for practical performance, making it widely used in real-world problems like spam detection, text classification, and medical diagnosis.
+
+
+//joint and marginal probabilities 
+  joint P(<x1,x2,x3,x4,x5> |N) 
+     checkking for exact combination this may not appear in the dataset 
+     If we multiply probabilities of many features directly from counts, any unseen combination gives zero.
+     This is called the curse of dimensionality: as the number of features increases, the number of possible combinations increases exponentially, and small datasets cannot cover all combinations.
+    
+    solution : use marginal probabilities (naive bayes idea )
+    instead of full joint probability , we assume independence of features 
+   marginal 
+    P(<x1,x2,x3,x4,x5> |N) -> P(x1|N)*p(x2|n)*P(x3|N)..
+    this will give non -zero even though the combination wasn’t in the dataset.
+    
+    key points :
+    Joint probabilities are hard to estimate with many features → risk of zeros.
+    Marginal probabilities are easier to compute and more reliable.
+    Naive Bayes uses feature independence to approximate joint probability using product of marginals.
+    As the dataset grows, joint probabilities may become positive naturally.
+    This approach helps overcome the curse of dimensionality.
+
+
+Problem: Zero probability for unseen feature combinations in small datasets.
+Solution: Use marginal probabilities and assume independence (Naive Bayes).
+
+//naive bayes classification :
+ it assumes features are independent to each other 
+ P(<x1,x2,x3,x4,x5> |N) -> P(x1|N)*p(x2|n)*P(x3|N)..
+  actually this works for discrete values 
+  for continous features these give wrong answers as exact matchign fails 
+
+
+//summary 
+Naive Bayes Classifier
+1️⃣ What it is
+    A probabilistic classifier based on Bayes’ theorem.
+    Assumes feature independence given the class.
+    Used for both categorical and continuous features (with discretization or Gaussian assumption).
+
+2. bayes theorem used  p(w|x) = (p(w)*p(x|w))/p(x)
+3. advantages :
+        Simple and fast → linear with number of features.
+        Works well even with small datasets.
+        Handles high-dimensional data efficiently.
+        Performs surprisingly well in many real-world applications (spam detection, text classification, medical diagnosis).
+4. Limitations :
+        Assumes feature independence, which is rarely true in practice.
+        If a feature value never appears in the training class, probability becomes zero → can use Laplace smoothing to fix.
+        For continuous features, requires discretization or assuming a distribution (like Gaussian).
+
+
+//Instead of calculating full joint probabilities (Bayes Classifier), Naive Bayes calculates product of marginal probabilities, making it practical, fast, and scalable.
+
+If you use the frequency-based Naïve Bayes (the simple count version), 
+then continuous values will almost never repeat → frequency = 0 → probability becomes 0 → classifier fails.
+
+👉 That is why discretization (binning / rounding / clustering) is needed for the frequency-count version.
+
+Naïve Bayes Classifier = Bayes Rule + Independence Assumption + Maximum Posterior Decision.
+
+Naïve Independence Assumption
+Assume all features are conditionally independent given the class: p(xi/n) = (p(x1/n) + p(x2/n) +.....)

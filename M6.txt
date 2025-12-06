@@ -1,0 +1,39 @@
+
+//regression model 
+you will have labelled data but output is continous (you are predicitng a number )
+whereas classification is like you have inputs +output but the output si categorical yuo are predicting the filed label 
+
+main difference is continous vs discrete but both are supervised learning because you have labelled data 
+
+
+//regression problem 
+1. gradient discent 
+2. closed form solution - single step 
+3. Numerical solution 
+
+//regression - we know to show the relationship between variabels 
+//linear regression 
+ one dependent and one independent variable 
+   equation of linear regression - y = mx +b 
+   y - dependent variable 
+   x is independent variable 
+   m is slope of the line 
+   b is the intercept ( the value of y when x is 0)
+
+ex: predict  pizza prices 
+  step1. data collection 
+  step2: calculations 
+  step3: prediction 
+  step4: visualization 
+
+  m = (sum of product of deviations)/(sum of square of deivation for x )
+  b = mean of y - (m* mean of x)
+
+//logistic regression 
+ used in  supervised learning under classification 
+ predict classes like in spam/non spam 
+ in linear regression we predict values - regression 
+
+ same here independent , dependent variable 
+ dependent is the one we predict ,independent is the one that helps us to predict 
+ 
